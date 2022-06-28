@@ -1,0 +1,13 @@
+{{ define "Index" }}
+{{ template "Header" }}
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{.Id}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">{{.Username}}</h6>
+    <p class="card-text">{{.Email}}</p>
+    <a href="#" class="card-link">Card link</a>
+    <a href="#" class="card-link">Another link</a>
+  </div>
+</div>
+{{ template "Footer" }}
+{{ end }}
