@@ -16,6 +16,9 @@ func main() {
 	db := app.NewDatabase()
 	router := httprouter.New()
 
+	directory := http.Dir("./assets")
+	router.ServeFiles("/assets/*filepath", directory)
+
 	roleRepository := repo_role.NewRoleRepository()
 	roleService := service_role.NewRoleService(roleRepository, db)
 	roleController := control_role.NewRoleController(roleService)

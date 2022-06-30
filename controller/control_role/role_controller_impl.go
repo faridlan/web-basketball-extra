@@ -9,7 +9,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-var tmpl = template.Must(template.ParseGlob("templates/*.html"))
+var tmpl = template.Must(template.Must(template.ParseGlob("templates/*.html")).ParseGlob("templates/roles/*.html"))
 
 type RoleControllerImpl struct {
 	RoleService service_role.RoleService

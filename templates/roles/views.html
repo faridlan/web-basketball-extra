@@ -1,0 +1,43 @@
+{{define "View"}} {{template "Header"}}
+<div class="container">
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-primary">
+                    <div class="box-header with-border" style="margin-top: 20px;">
+                        <a href="role/create"><button class="btn btn-primary">
+                                <i class="fa fa-plus"> </i> Tambah Buku</button></a>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <br />
+                        <div class="table-responsive">
+                            <table id="example1" class="table table-bordered" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Name</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{ range . }}
+                                    <tr>
+                                        <td>{{ .Id }}</td>
+                                        <td> {{ .Name }} </td>
+                                        <td>
+                                            <a href="/role/update?id={{ .Id }}"><button class="btn btn-success"><i
+                                                        class="fa fa-edit"></i></button></a>
+                                        </td>
+                                    </tr>
+                                    {{ end }}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{{template "Footer"}} {{end}}
