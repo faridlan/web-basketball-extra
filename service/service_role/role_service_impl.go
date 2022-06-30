@@ -3,6 +3,7 @@ package service_role
 import (
 	"context"
 	"database/sql"
+	"log"
 
 	"github.com/faridlan/web-basketball-extra/helper"
 	"github.com/faridlan/web-basketball-extra/helper/helper_model"
@@ -36,12 +37,36 @@ func (service RoleServiceImpl) Create(ctx context.Context, request web_role.Role
 	return i
 }
 
-func (service RoleServiceImpl) Update(ctx context.Context, request web_role.RoleUpdateReq) {
-	panic("not implemented") // TODO: Implement
+func (service RoleServiceImpl) Update(ctx context.Context, request web_role.RoleUpdateReq) int64 {
+	tx, err := service.DB.Begin()
+	helper.PanicIfError(err)
+	defer helper.CommitOrRollback(tx)
+
+	role := domain.Role{
+		Id:   request.Id,
+		Name: request.Name,
+	}
+
+	i := service.RepoRole.Update(ctx, tx, role)
+	return i
 }
 
 func (service RoleServiceImpl) Delete(ctx context.Context, roleId int) {
-	panic("not implemented") // TODO: Implement
+	tx, err := service.DB.Begin()
+	helper.PanicIfError(err)
+	defer helper.CommitOrRollback(tx)
+
+	service.RepoRole.Delete(ctx, tx, roleId)
+}
+
+func (service RoleServiceImpl) FindById(ctx context.Context, roleId int) web_role.RoleResponse {
+	tx, err := service.DB.Begin()
+	helper.PanicIfError(err)
+	defer helper.CommitOrRollback(tx)
+
+	roleResponse := service.RepoRole.FindId(ctx, tx, roleId)
+	log.Print(roleResponse)
+	return helper_model.RoleResponse(roleResponse)
 }
 
 func (service RoleServiceImpl) FindAll(ctx context.Context) []web_role.RoleResponse {

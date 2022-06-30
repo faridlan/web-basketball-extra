@@ -26,8 +26,10 @@
                                         <td>{{ .Id }}</td>
                                         <td> {{ .Name }} </td>
                                         <td>
-                                            <a href="/role/update?id={{ .Id }}"><button class="btn btn-success"><i
+                                            <a href="/role/edit?id={{ .Id }}"><button class="btn btn-success"><i
                                                         class="fa fa-edit"></i></button></a>
+                                            <a href="/role/delete?id={{ .Id }}"><button class="btn btn-danger"><i
+                                                        class="fa fa-trash"></i></button></a>
                                         </td>
                                     </tr>
                                     {{ end }}

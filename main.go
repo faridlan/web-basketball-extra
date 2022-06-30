@@ -25,7 +25,10 @@ func main() {
 
 	router.GET("/role", roleController.FindAll)
 	router.GET("/role/create", roleController.CreateView)
+	router.GET("/role/edit", roleController.FindById)
+	router.GET("/role/delete", roleController.Delete)
 	router.POST("/role/create", roleController.Create)
+	router.POST("/role/update", roleController.Update)
 
 	server := http.Server{
 		Addr:    "localhost:8080",

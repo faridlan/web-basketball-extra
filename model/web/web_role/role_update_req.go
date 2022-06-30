@@ -1,6 +1,6 @@
 package web_role
 
 type RoleUpdateReq struct {
-	Id   int
+	Id   int64
 	Name string
 }
