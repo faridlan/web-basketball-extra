@@ -12,10 +12,10 @@ func AchievmentResponse(role domain.Achievment) web_achievment.AchievmentRespons
 	}
 }
 
-func AchievmentResponses(roles []domain.Achievment) []web_achievment.AchievmentResponse {
+func AchievmentResponses(achievs []domain.Achievment) []web_achievment.AchievmentResponse {
 	achievmentResponse := []web_achievment.AchievmentResponse{}
-	for _, role := range roles {
-		achievmentResponse = append(achievmentResponse, AchievmentResponse(role))
+	for _, achiev := range achievs {
+		achievmentResponse = append(achievmentResponse, AchievmentResponse(achiev))
 	}
 
 	return achievmentResponse
