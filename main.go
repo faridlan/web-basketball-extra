@@ -1,38 +1,32 @@
 package main
 
 import (
-	"html/template"
 	"net/http"
+
+	"github.com/faridlan/web-basketball-extra/app"
+	"github.com/faridlan/web-basketball-extra/controller/control_role"
+	"github.com/faridlan/web-basketball-extra/repository/repo_role"
+	"github.com/faridlan/web-basketball-extra/service/service_role"
+	_ "github.com/go-sql-driver/mysql"
+	"github.com/julienschmidt/httprouter"
 )
 
-var tmpl = template.Must(template.ParseGlob("templates/*"))
-
-type User struct {
-	Id       int
-	Username string
-	Email    string
-}
-
-func HelloWeb(writer http.ResponseWriter, request *http.Request) {
-	jhon := User{
-		Id:       1,
-		Username: "Jhon Doe Again Again",
-		Email:    "jhondoe@mail.com",
-	}
-
-	tmpl.ExecuteTemplate(writer, "Index", jhon)
-}
-
 func main() {
-	mux := http.NewServeMux()
-	mux.HandleFunc("/", HelloWeb)
 
-	staticDirectory := http.Dir("assets")
-	mux.Handle("/assets/", http.StripPrefix("/assets", http.FileServer(staticDirectory)))
+	db := app.NewDatabase()
+	router := httprouter.New()
+
+	roleRepository := repo_role.NewRoleRepository()
+	roleService := service_role.NewRoleService(roleRepository, db)
+	roleController := control_role.NewRoleController(roleService)
+
+	router.GET("/role", roleController.FindAll)
+	router.GET("/role/create", roleController.CreateView)
+	router.POST("/role/create", roleController.Create)
 
 	server := http.Server{
 		Addr:    "localhost:8080",
-		Handler: mux,
+		Handler: router,
 	}
 
 	err := server.ListenAndServe()

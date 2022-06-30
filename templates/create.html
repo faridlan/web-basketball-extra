@@ -1,0 +1,8 @@
+{{define "Create"}} {{template "Header"}} {{.Alert}}
+
+<form method="POST" action="create">
+    <label> Name </label><input type="text" name="name" /><br />
+    <input type="submit" value="Save user" />
+</form>
+
+{{template "Footer"}} {{end}}

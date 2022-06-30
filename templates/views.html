@@ -1,0 +1,20 @@
+{{define "View"}} {{template "Header"}}
+
+<table border="1">
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>Name</td>
+        </tr>
+    </thead>
+    <tbody>
+        {{ range . }}
+        <tr>
+            <td>{{ .Id }}</td>
+            <td> {{ .Name }} </td>
+        </tr>
+        {{ end }}
+    </tbody>
+</table>
+
+{{template "Footer"}} {{end}}
