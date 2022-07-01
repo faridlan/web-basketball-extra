@@ -5,10 +5,10 @@ import (
 	"github.com/faridlan/web-basketball-extra/model/web/web_achievment"
 )
 
-func AchievmentResponse(role domain.Achievment) web_achievment.AchievmentResponse {
+func AchievmentResponse(achievs domain.Achievment) web_achievment.AchievmentResponse {
 	return web_achievment.AchievmentResponse{
-		Id:   role.Id,
-		Desc: role.Desc,
+		Id:   achievs.Id,
+		Desc: achievs.Desc,
 	}
 }
 
